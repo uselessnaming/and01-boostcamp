@@ -1,7 +1,6 @@
-package com.andone.memorip.data.utiltest
+package com.andone.memorip.data.util
 
 import com.andone.memorip.data.common.ApiResult
-import com.andone.memorip.data.util.apiCall
 import com.andone.memorip.domain.model.NetworkError
 import com.andone.memorip.domain.model.UnexpectedError
 import kotlinx.coroutines.test.runTest
