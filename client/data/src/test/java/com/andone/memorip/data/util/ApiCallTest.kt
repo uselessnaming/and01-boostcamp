@@ -12,6 +12,7 @@ import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response
 import java.io.IOException
+import kotlin.coroutines.cancellation.CancellationException
 
 class ApiCallTest {
 
@@ -98,5 +99,17 @@ class ApiCallTest {
         ).exceptionOrNull()
 
         assertTrue(error is UnexpectedError)
+    }
+
+    /** Failed Case > Cancellation Exception의 경우 먼저 throw를 던지 이후
+     * 나머지 exception을 받아 처리하는 방식으로 해야 함
+     * */
+    @Test
+    fun `취소 예외는 삼키지 않고 다시 던진다`() = runTest {
+        val outcome = runCatching {
+            apiCall<String> { throw CancellationException("cancelled") }
+        }
+
+        assertTrue(outcome.exceptionOrNull() is CancellationException)
     }
 }
