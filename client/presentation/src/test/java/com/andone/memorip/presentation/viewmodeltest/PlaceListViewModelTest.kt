@@ -22,6 +22,7 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.runs
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
@@ -34,7 +35,9 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PlaceListViewModelTest {
 
     @get:Rule
@@ -208,7 +211,7 @@ class PlaceListViewModelTest {
         collectPlaces()
 
         viewModel.onAction(PlaceListAction.OnQueryChange("카페"))
-        advanceTimeBy(300)
+        advanceTimeBy(300.milliseconds)
         runCurrent()
 
         verify(exactly = 1) {
@@ -221,7 +224,7 @@ class PlaceListViewModelTest {
         collectPlaces()
 
         viewModel.onAction(PlaceListAction.OnQueryChange("카페"))
-        advanceTimeBy(299)
+        advanceTimeBy(299.milliseconds)
         runCurrent()
 
         verify(exactly = 0) { placeRepository.getPlaceList(any(), any(), any(), any(), any()) }
@@ -232,7 +235,7 @@ class PlaceListViewModelTest {
         collectPlaces()
 
         viewModel.onAction(PlaceListAction.OnRegionChipClick(root("서울")))
-        advanceTimeBy(300)
+        advanceTimeBy(300.milliseconds)
         runCurrent()
 
         verify { placeRepository.getPlaceList("", emptyList(), "서울", emptyList(), any()) }
@@ -245,7 +248,7 @@ class PlaceListViewModelTest {
         viewModel.onAction(PlaceListAction.OnRegionChipClick(root("서울")))
         viewModel.onAction(PlaceListAction.OnRegionChipClick(sub("서울", "강남구")))
         viewModel.onAction(PlaceListAction.OnRegionChipClick(sub("서울", "마포구")))
-        advanceTimeBy(300)
+        advanceTimeBy(300.milliseconds)
         runCurrent()
 
         verify {
@@ -258,7 +261,7 @@ class PlaceListViewModelTest {
         collectPlaces()
 
         viewModel.onAction(PlaceListAction.OnTagChipClick(tag))
-        advanceTimeBy(300)
+        advanceTimeBy(300.milliseconds)
         runCurrent()
 
         verify { placeRepository.getPlaceList("", listOf("t1"), null, emptyList(), any()) }
