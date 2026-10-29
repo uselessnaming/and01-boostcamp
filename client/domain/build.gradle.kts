@@ -23,4 +23,7 @@ dependencies {
 
     // Paging
     implementation(libs.androidx.paging.common)
+
+    // Test
+    testImplementation(libs.junit)
 }
