@@ -60,7 +60,7 @@ class TripPlacePagingSourceTest {
 
         val result = source.load(refresh())
 
-        assertEquals(PagingSource.LoadResult.Page(data = listOf(domain), prevKey = null, nextKey = 1), result)
+        assertEquals(LoadResult.Page(data = listOf(domain), prevKey = null, nextKey = 1), result)
     }
 
     @Test
@@ -68,7 +68,7 @@ class TripPlacePagingSourceTest {
         coEvery { service.getTripPlaces(any(), any(), any(), any()) } returns
             ApiResult(data = listOf(response), pagination = pagination(false))
 
-        val page = source.load(refresh()) as PagingSource.LoadResult.Page
+        val page = source.load(refresh()) as LoadResult.Page
 
         assertEquals("", page.data.single().imageUrl)
     }
@@ -80,7 +80,7 @@ class TripPlacePagingSourceTest {
 
         val result = source.load(refresh(key = 3))
 
-        assertEquals(PagingSource.LoadResult.Page(data = listOf(domain), prevKey = 2, nextKey = null), result)
+        assertEquals(LoadResult.Page(data = listOf(domain), prevKey = 2, nextKey = null), result)
     }
 
     @Test
@@ -88,7 +88,7 @@ class TripPlacePagingSourceTest {
         coEvery { service.getTripPlaces(any(), any(), any(), any()) } returns
             ApiResult(data = null, pagination = null)
 
-        val page = source.load(refresh()) as PagingSource.LoadResult.Page
+        val page = source.load(refresh()) as LoadResult.Page
 
         assertTrue(page.data.isEmpty())
         assertNull(page.nextKey)
@@ -109,7 +109,7 @@ class TripPlacePagingSourceTest {
         coEvery { service.getTripPlaces(any(), any(), any(), any()) } returns
             ApiResult(error = ApiResult.ErrorDetail(code = "E1", message = "실패"))
 
-        val result = source.load(refresh()) as PagingSource.LoadResult.Error
+        val result = source.load(refresh()) as LoadResult.Error
 
         assertTrue(result.throwable is IllegalStateException)
         assertEquals("실패", result.throwable.message)
@@ -120,7 +120,7 @@ class TripPlacePagingSourceTest {
         val exception = RuntimeException("오류")
         coEvery { service.getTripPlaces(any(), any(), any(), any()) } throws exception
 
-        val result = source.load(refresh()) as PagingSource.LoadResult.Error
+        val result = source.load(refresh()) as LoadResult.Error
 
         assertSame(exception, result.throwable)
     }
