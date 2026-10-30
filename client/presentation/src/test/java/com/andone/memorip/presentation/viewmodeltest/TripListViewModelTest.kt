@@ -1,6 +1,5 @@
 package com.andone.memorip.presentation.viewmodeltest
 
-import androidx.lifecycle.viewmodel.compose.viewModel
 import app.cash.turbine.test
 import com.andone.memorip.domain.model.Trip
 import com.andone.memorip.domain.model.Visibility
@@ -19,6 +18,7 @@ import io.mockk.verify
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertFalse
 import junit.framework.TestCase.assertTrue
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
@@ -31,6 +31,7 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.time.Duration.Companion.milliseconds
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class TripListViewModelTest {
 
     @get:Rule
