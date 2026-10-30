@@ -41,7 +41,7 @@ class TagPagingSourceTest {
 
         val result = source.load(refresh(key = null))
 
-        assertEquals(PagingSource.LoadResult.Page(data = tags, prevKey = null, nextKey = 1), result)
+        assertEquals(LoadResult.Page(data = tags, prevKey = null, nextKey = 1), result)
         coVerify { service.getTags(page = 0, size = 20) }
     }
 
