@@ -121,7 +121,7 @@ class PlaceMappingTest {
             isPublic = true
         )
 
-        assertEquals(PlaceEntity("p1", "장소", 37.5, 127.0, "주소", "", 1.5f, true), response)
+        assertEquals(PlaceEntity("p1", "장소", 37.5, 127.0, "주소", "", 1.5f, true), response.toEntity())
     }
 
     @Test
