@@ -31,6 +31,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SelectTripViewModelTest {
@@ -91,12 +92,12 @@ class SelectTripViewModelTest {
     @Before
     fun setUp() {
         coEvery { tripRepository.fetchMyTrips(any(), any(), any()) } coAnswers {
-            delay(10)
+            delay(10.milliseconds)
             Result.success(Unit)
         }
         coEvery { tripRepository.myTrips } returns flowOf(emptyList())
         coEvery { tripRepository.fetchMyTripsWithPlaceStatus(any(), any(), any()) } coAnswers {
-            delay(10)
+            delay(10.milliseconds)
             Result.success(emptyList())
         }
         viewModel = SelectTripViewModel(tripRepository, placeRepository, snackBarManager)
