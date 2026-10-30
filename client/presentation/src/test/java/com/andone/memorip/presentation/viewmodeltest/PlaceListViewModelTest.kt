@@ -37,6 +37,7 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.time.Duration.Companion.milliseconds
 
+@Suppress("UnusedFlow")
 @OptIn(ExperimentalCoroutinesApi::class)
 class PlaceListViewModelTest {
 
@@ -251,9 +252,7 @@ class PlaceListViewModelTest {
         advanceTimeBy(300.milliseconds)
         runCurrent()
 
-        verify {
-            placeRepository.getPlaceList("", emptyList(), "서울", listOf("강남구", "마포구"), any())
-        }
+        verify { placeRepository.getPlaceList("", emptyList(), "서울", listOf("강남구", "마포구"), any()) }
     }
 
     @Test
