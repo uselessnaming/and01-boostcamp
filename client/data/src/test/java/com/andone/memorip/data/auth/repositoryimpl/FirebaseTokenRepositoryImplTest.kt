@@ -1,6 +1,5 @@
 package com.andone.memorip.data.auth.repositoryimpl
 
-import com.andone.memorip.data.util.apiCall
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -13,10 +12,10 @@ import io.mockk.unmockkStatic
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.test.runTest
 import org.junit.After
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.Before
 import org.junit.Test
-import org.junit.Assert.assertNull
-import org.junit.Assert.assertEquals
 
 class FirebaseTokenRepositoryImplTest {
 
