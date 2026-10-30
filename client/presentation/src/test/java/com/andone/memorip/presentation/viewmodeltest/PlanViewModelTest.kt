@@ -19,6 +19,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
@@ -33,6 +34,7 @@ import org.junit.Test
 import java.time.LocalDate
 import java.time.LocalDateTime
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class PlanViewModelTest {
 
     @get:Rule
