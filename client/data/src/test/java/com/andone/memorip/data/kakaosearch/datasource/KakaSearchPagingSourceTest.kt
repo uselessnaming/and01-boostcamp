@@ -18,7 +18,7 @@ import org.junit.Assert.assertSame
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
-class kakaSearchPagingSourceTest {
+class KakaSearchPagingSourceTest {
 
     private val service: KakaoSearchService = mockk()
     private val source = KakaoSearchPagingSource(apiService = service, query = "카페")
