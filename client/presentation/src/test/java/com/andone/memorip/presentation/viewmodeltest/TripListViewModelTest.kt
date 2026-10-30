@@ -29,6 +29,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import kotlin.time.Duration.Companion.milliseconds
 
 class TripListViewModelTest {
 
@@ -159,7 +160,7 @@ class TripListViewModelTest {
         collectState()
 
         viewModel.onAction(TripListAction.OnSearchQueryChange("제주"))
-        advanceTimeBy(300)
+        advanceTimeBy(300.milliseconds)
         runCurrent()
 
         assertEquals("제주", viewModel.uiState.value.searchQuery)
